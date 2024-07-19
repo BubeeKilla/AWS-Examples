@@ -1,13 +1,8 @@
 tasks:
   - name: aws-cli
-    init: # This runs when the workspace is starting up
-        sudo apt-get update
-        sudo apt-get install -y unzip
-     before: # This runs before the main task defined in 'init'
+    before: # This runs before the main task defined in 'init'
         cd /workspace
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
         sudo ./aws/install
         cd $THEIA_WORKSPACE_ROOT
-    init: # This runs after 'before'
-        aws --version # Verify AWS CLI installation
