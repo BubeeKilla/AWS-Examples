@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+echo "== delete objects in folder"
+
+# Check for bucket name
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name eg. my-bucket-name"
+    exit 1
+fi
+
+# Check for folder path
+if [ -z "$2" ]; then
+    echo "There needs to be a folder path eg. my-folder/"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+FOLDER_PATH=$2
+
+# Delete all objects in the specified folder
+aws s3 rm s3://$BUCKET_NAME/$FOLDER_PATH --recursive
+
+echo "== objects and keys removed"

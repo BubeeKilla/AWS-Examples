@@ -42,3 +42,5 @@ done
 tree $OUTPUT_DIR
 
 aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME/files
+
+echo "== synced"

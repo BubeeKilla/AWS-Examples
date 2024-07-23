@@ -19,3 +19,5 @@ OBJECT_KEY=$2
 aws s3api delete-object \
 --bucket $BUCKET_NAME \
 --key $OBJECT_KEY
+
+echo "== object deleted"

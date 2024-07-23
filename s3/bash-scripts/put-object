@@ -24,3 +24,5 @@ aws s3api put-object \
 --bucket $BUCKET_NAME \
 --body $FILENAME \
 --key "$OBJECT_KEY"
+
+echo "== end of put"
