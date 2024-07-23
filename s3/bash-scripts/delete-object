@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "==put object"
+echo "== delete objects"
 
 # Check for bucket name
 if [ -z "$1" ]; then
@@ -14,13 +14,8 @@ if [ -z "$2" ]; then
 fi
 
 BUCKET_NAME=$1
-FILENAME=$2
+OBJECT_KEY=$2
 
-# Preserve the directory structure in the S3 key
-# Remove the leading slash from the path if needed
-OBJECT_KEY=$(echo "$FILENAME" | sed 's|^/||')
-
-aws s3api put-object \
+aws s3api delete-object \
 --bucket $BUCKET_NAME \
---body $FILENAME \
---key "$OBJECT_KEY"
+--key $OBJECT_KEY
