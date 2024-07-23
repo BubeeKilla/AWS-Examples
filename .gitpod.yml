@@ -7,3 +7,7 @@ tasks:
       sudo ./aws/install 
       cd $THEIA_WORKSPACE_ROOT
       sudo apt-get install tree
+  
+  - name: tree
+    before: |
+      sudo apt-get install tree

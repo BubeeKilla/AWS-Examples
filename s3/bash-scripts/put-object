@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
+echo "==put object"
 
-# File storage
-OUTPUT_DIR="/tmp/s3-bash-files"
+# Check for bucket name
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name eg. ./put-object my-bucket-name /path/to/file"
+    exit 1
+fi
 
-# Output folder create
-mkdir -p $OUTPUT_DIR
+# Check for filename
+if [ -z "$2" ]; then
+    echo "There needs to be a filename eg. ./put-object my-bucket-name /path/to/file"
+    exit 1
+fi
 
-# Generate a random number 
-# between 5 and 10 to how 
-# many files will be created
-NUM_FILES=$((RANDOM % 6 + 5))
+BUCKET_NAME=$1
+FILENAME=$2
 
-for ((i=1; i<=$NUM_FILES; i++)); do
-    # Generate a random file
-    FILENAME="$OUTPUT_DIR/file_$i.txt"
+# Preserve the directory structure in the S3 key
+# Remove the leading slash from the path if needed
+OBJECT_KEY=$(echo "$FILENAME" | sed 's|^/||')
 
-    # Generate random data and 
-    # add it to the file
-    dd if=/dev/urandom of="$FILENAME" bs=1024 count=$((RANDOM %1024 + 1)) 2>/dev/null
-done
+aws s3api put-object \
+--bucket $BUCKET_NAME \
+--body $FILENAME \
+--key "$OBJECT_KEY"

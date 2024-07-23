@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "== list bucket"
 
-#Check for bucket name
+# Check for bucket name
 if [ -z "$1" ]; then
     echo "There needs to be a bucket name eg. ./bucket my-bucket-name"
     exit 1
@@ -10,4 +10,4 @@ fi
 BUCKET_NAME=$1
 
 aws s3api list-objects-v2 \
-    --bucket $BUCKET_NAME 
+--bucket $BUCKET_NAME 
