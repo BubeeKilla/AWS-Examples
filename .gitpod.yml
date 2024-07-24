@@ -1,3 +1,4 @@
+
 tasks:
   # install AWS CLI
   # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
@@ -31,3 +32,7 @@ tasks:
       rm packages-microsoft-prod.deb
       sudo apt-get update
       sudo apt-get install -y powershell
+
+vscode:
+  extensions:
+    - ms-vscode.powershell
