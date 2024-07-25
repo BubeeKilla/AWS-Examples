@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
+
+# Print a message indicating the start of the bucket creation process.
 echo "== create bucket"
 
-# Check for bucket name
+# Check if a bucket name is provided as the first argument.
+# If no bucket name is provided, print an error message and exit with status 1.
 if [ -z "$1" ]; then
     echo "There needs to be a bucket name eg. my-bucket-name"
     exit 1
 fi
 
+# Assign the first argument to the BUCKET_NAME variable.
 BUCKET_NAME=$1
 
+# Use the AWS CLI to create a new S3 bucket.
+# The bucket name is specified by the BUCKET_NAME variable.
+# The bucket is created in the 'eu-central-1' region (Frankfurt).
+# The `--query` option extracts the location information from the response.
+# The `--output` option specifies that the output should be in plain text.
 aws s3api create-bucket \
 --bucket $BUCKET_NAME \
 --create-bucket-configuration LocationConstraint=eu-central-1 \
 --query Location \
 --output text
 
-echo "== bucket creted"
+# Print a message indicating that the bucket has been created.
+echo "== bucket created"

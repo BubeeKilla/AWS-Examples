@@ -1,22 +1,31 @@
 #!/usr/bin/env bash
+
+# Print a message indicating the start of the process to delete objects in a specified folder.
 echo "== delete objects in folder"
 
-# Check for bucket name
+# Check if the bucket name argument is provided.
+# If not, print an error message and exit with a status code of 1.
 if [ -z "$1" ]; then
     echo "There needs to be a bucket name eg. my-bucket-name"
     exit 1
 fi
 
-# Check for folder path
+# Check if the folder path argument is provided.
+# If not, print an error message and exit with a status code of 1.
 if [ -z "$2" ]; then
     echo "There needs to be a folder path eg. my-folder/"
     exit 1
 fi
 
+# Assign the first argument to the variable BUCKET_NAME.
 BUCKET_NAME=$1
+
+# Assign the second argument to the variable FOLDER_PATH.
 FOLDER_PATH=$2
 
-# Delete all objects in the specified folder
+# Use the AWS CLI to delete all objects within the specified folder in the given S3 bucket.
+# The `--recursive` option ensures that all objects within the folder are removed.
 aws s3 rm s3://$BUCKET_NAME/$FOLDER_PATH --recursive
 
+# Print a message indicating the completion of the object deletion process.
 echo "== objects and keys removed"

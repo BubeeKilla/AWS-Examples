@@ -1,28 +1,40 @@
 #!/usr/bin/env bash
+
+# Print a message indicating the start of the S3 object upload process.
 echo "==put object"
 
-# Check for bucket name
+# Check if the bucket name argument is provided.
+# If not, print an error message and exit with a status code of 1.
 if [ -z "$1" ]; then
     echo "There needs to be a bucket name eg. my-bucket-name"
     exit 1
 fi
 
-# Check for filename
+# Check if the filename argument is provided.
+# If not, print an error message and exit with a status code of 1.
 if [ -z "$2" ]; then
     echo "There needs to be a filename eg. my-bucket-name /path/to/file"
     exit 1
 fi
 
+# Assign the first argument to the variable BUCKET_NAME.
 BUCKET_NAME=$1
+
+# Assign the second argument to the variable FILENAME.
 FILENAME=$2
 
-# Preserve the directory structure in the S3 key
-# Remove the leading slash from the path if needed
+# Prepare the S3 object key by removing any leading slashes from the file path.
+# This ensures that the object key in S3 reflects the correct directory structure.
 OBJECT_KEY=$(echo "$FILENAME" | sed 's|^/||')
 
+# Use the AWS CLI to upload the specified file to the given S3 bucket.
+# The `--bucket` parameter specifies the destination bucket.
+# The `--body` parameter specifies the path to the file to be uploaded.
+# The `--key` parameter specifies the key (name) of the object in S3.
 aws s3api put-object \
 --bucket $BUCKET_NAME \
 --body $FILENAME \
 --key "$OBJECT_KEY"
 
+# Print a message indicating the end of the S3 object upload process.
 echo "== end of put"

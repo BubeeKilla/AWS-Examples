@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
+
+# Print a message indicating the start of the bucket listing process.
 echo "== list buckets"
 
+# Use the AWS CLI to list all S3 buckets.
+# The `--query` parameter filters the output to show only the names of the buckets.
+# The `--output text` parameter formats the output as plain text.
 aws s3api list-buckets --query "Buckets[].Name" --output text
 
+# Print a message indicating the end of the bucket listing process.
 echo "== end"

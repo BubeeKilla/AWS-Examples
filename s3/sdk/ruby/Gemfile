@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
+# Specifies the source for fetching Ruby gems.
+# The source 'https://rubygems.org' is the default and most widely-used gem repository.
 source "https://rubygems.org"
 
-gem 'aws-sdk-s3'
-gem 'pry'
-gem 'nokogiri'
+# Lists the gems required by the application.
 
+# aws-sdk-s3: Provides a Ruby interface for interacting with AWS S3.
+# It includes methods for creating, reading, updating, and deleting objects in S3 buckets.
+gem 'aws-sdk-s3'
+
+# pry: A runtime developer console and IRB alternative.
+# It allows for powerful debugging and introspection capabilities, providing an enhanced interactive REPL.
+gem 'pry'
+
+# nokogiri: A gem for parsing and manipulating HTML and XML.
+# It is commonly used for extracting and transforming data from web pages and other document formats.
+gem 'nokogiri'

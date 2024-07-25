@@ -1,46 +1,51 @@
 #!/usr/bin/env bash
+
+# Print a message indicating the start of the synchronization process.
 echo "== sync"
 
-# Check for bucket name
+# Check if the bucket name argument is provided.
+# If not, print an error message and exit with a status code of 1.
 if [ -z "$1" ]; then
     echo "There needs to be a bucket name eg. my-bucket-name"
     exit 1
 fi
 
-# Check for filename
+# Check if the filename prefix argument is provided.
+# If not, print an error message and exit with a status code of 1.
 if [ -z "$2" ]; then
-    echo "There needs to be a filename eg. my-bucket-name /path/to/file"
+    echo "There needs to be a filename prefix eg. my-bucket-name /path/to/file"
     exit 1
 fi
 
+# Assign the first argument to the variable BUCKET_NAME.
 BUCKET_NAME=$1
+
+# Assign the second argument to the variable FILENAME_PREFIX.
 FILENAME_PREFIX=$2
 
-# File storage
+# Define the directory where temporary files will be stored.
 OUTPUT_DIR="/tmp/s3-bash-files"
 
-# Remove the folder if exists
+# Remove the directory if it already exists to ensure a clean state.
 rm -r $OUTPUT_DIR
 
-# Output folder create
+# Create the directory to store generated files.
 mkdir -p $OUTPUT_DIR
 
-# Generate a random number 
-# between 5 and 10 to how 
-# many files will be created
+# Generate a random number between 5 and 10 to determine how many files will be created.
 NUM_FILES=$((RANDOM % 6 + 5))
 
+# Loop to create the specified number of random files.
 for ((i=1; i<=$NUM_FILES; i++)); do
-    # Generate a random file
+    # Define the file path with a prefix and an index.
     FILENAME="$OUTPUT_DIR/${FILENAME_PREFIX}_$i.txt"
 
-    # Generate random data and 
-    # add it to the file
-    dd if=/dev/urandom of="$FILENAME" bs=1024 count=$((RANDOM %1024 + 1)) 2>/dev/null
+    # Generate random data and write it to the file.
+    dd if=/dev/urandom of="$FILENAME" bs=1024 count=$((RANDOM % 1024 + 1)) 2>/dev/null
 done
 
+# Display the structure of the OUTPUT_DIR directory.
 tree $OUTPUT_DIR
 
-aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME/files
-
-echo "== synced"
+# Sync the contents of OUTPUT_DIR to the specified S3 bucket under the 'files' folder.
+aws s3 sync $OUTPUT_DIR s3://$BUCKET_
