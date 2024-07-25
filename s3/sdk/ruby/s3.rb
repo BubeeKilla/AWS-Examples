@@ -8,7 +8,7 @@ bucket_name = ENV['BUCKET_NAME'] # Fetch the S3 bucket name from environment var
 region = ENV['AWS_DEFAULT_REGION'] || 'us-east-1' # Fetch the AWS region from environment variables or default to 'us-east-1'
 
 # Pause execution and start interactive debugging session
-binding.pry
+# binding.pry
 
 # Initialize AWS S3 Client
 client = Aws::S3::Client.new(region: region) # Create a new S3 client object with the specified region
