@@ -2,7 +2,7 @@
 tasks:
   # install AWS CLI
   # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-  - name: aws-cli and tree
+  - name: aws-cli
     before: |
       cd /workspace 
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 

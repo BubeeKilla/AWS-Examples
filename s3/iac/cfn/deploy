@@ -1,9 +1,31 @@
 #!/usr/bin/env bash
 
-echo "== deploy s3 bucket via cloudformation"
+# Script to deploy an S3 bucket using AWS CloudFormation
 
+echo "== Deploy S3 bucket via CloudFormation =="
+
+# Set the stack name for CloudFormation
 STACK_NAME="cfn-s3-simple"
 
+# Specify the path to the CloudFormation template file
+TEMPLATE_PATH="./template.yaml"
+
+# Check if the template file exists
+if [ ! -f "$TEMPLATE_PATH" ]; then
+    echo "Error: Template file $TEMPLATE_PATH does not exist."
+    exit 1
+fi
+
+# Deploy the CloudFormation stack using the specified template
 aws cloudformation deploy \
---template-file template.yaml \
---stack-name $STACK_NAME
+    --template-file "$TEMPLATE_PATH" \
+    --no-execute-changeset \
+    --stack-name "$STACK_NAME"
+
+# Output the result of the deployment
+if [ $? -eq 0 ]; then
+    echo "Deployment of stack $STACK_NAME succeeded."
+else
+    echo "Deployment of stack $STACK_NAME failed."
+    exit 1
+fi

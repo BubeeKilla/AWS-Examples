@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Script to deploy an S3 bucket using AWS CloudFormation
+
+echo "== Delete stack for S3 bucket"
+
+# Set the stack name for CloudFormation
+STACK_NAME="cfn-s3-simple"
+
+# Delete the CloudFormation stack using the specified template
+aws cloudformation delete-stack \
+    --stack-name "$STACK_NAME"
+
