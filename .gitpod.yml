@@ -44,6 +44,10 @@ tasks:
       sudo apt update
       sudo apt-get install terraform
 
+      # install aws cdk
+      # https://github.com/aws/aws-cdk
+      npm i -g aws-cdk
+
 
 vscode:
   extensions:
