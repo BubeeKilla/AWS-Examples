@@ -1,29 +1,26 @@
 
 tasks:
-  # install AWS CLI
-  # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-  - name: aws-cli
+  - name: aws-cli / tree / powershell / terraform
     before: |
+
+      # install AWS CLI
+      # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
       cd /workspace 
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
       unzip awscliv2.zip 
       sudo ./aws/install 
       cd $THEIA_WORKSPACE_ROOT
   
-  # install tree for better visualisation of 
-  # the PATH inside the terminal using command "tree"
-  - name: tree
-    before: |
+      # install tree for better visualisation of 
+      # the PATH inside the terminal using command "tree"
       sudo apt-get install tree
 
-  # isntal powershell
-  # https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.4
-  # after powershell launch cmd "pwsh" install AWS Tools for powershell "Install-Module -Name AWS.Tools.Installer"
-  # https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-linux-mac.html
-  # https://docs.aws.amazon.com/powershell/latest/reference/
-  # to quit powershell type "exit"
-  - name: powershell
-    before: |
+       # isntal powershell
+      # https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.4
+      # after powershell launch cmd "pwsh" install AWS Tools for powershell "Install-Module -Name AWS.Tools.Installer"
+      # https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-linux-mac.html
+      # https://docs.aws.amazon.com/powershell/latest/reference/
+      # to quit powershell type "exit"
       sudo apt-get update
       sudo apt-get install -y wget apt-transport-https software-properties-common
       source /etc/os-release
@@ -33,9 +30,7 @@ tasks:
       sudo apt-get update
       sudo apt-get install -y powershell
   
-  # install terraform https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
-  - name: terraform
-    before: |
+      # install terraform https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
       sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
       wget -O- https://apt.releases.hashicorp.com/gpg | \
       gpg --dearmor | \
