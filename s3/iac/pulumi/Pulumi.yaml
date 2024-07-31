@@ -1,0 +1,11 @@
+name: s3-simple-sdk
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: A python project for AWS s3 create bucket
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-python
