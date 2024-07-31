@@ -45,8 +45,14 @@ tasks:
       sudo apt-get install terraform
 
 
-
-
 vscode:
   extensions:
     - ms-vscode.powershell
+    - redhat.java
+    - vscjava.vscode-java-debug
+    - vscjava.vscode-java-pack
+    - vscjava.vscode-maven
+    - vscjava.vscode-java-dependency
+    - ms-python.python
+    - ms-python.debugpy
+    - vscjava.vscode-java-test
